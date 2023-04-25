@@ -8,6 +8,7 @@ import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import {
   GiBarn,
   GiBoatFishing,
+  GiCactus,
   GiCastle,
   GiCaveEntrance,
   GiForestCamp,
@@ -74,7 +75,7 @@ export const categories = [
   {
     label: "Arctic",
     icon: BsSnow,
-    description: "This property is in polar climate belt!",
+    description: "This property is in arctic environment!",
   },
   {
     label: "Cave",
@@ -83,18 +84,18 @@ export const categories = [
   },
   {
     label: "Desert",
-    icon: FaSkiing,
+    icon: GiCactus,
     description: "This property is in the desert!",
   },
   {
     label: "Barns",
     icon: GiBarn,
-    description: "This property is in the barn!",
+    description: "This property is in a barn!",
   },
   {
     label: "Lux",
     icon: IoDiamond,
-    description: "This property is luxurious!",
+    description: "This property is brand new and luxurious!",
   },
 ];
 
