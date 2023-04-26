@@ -1,10 +1,11 @@
 "use client";
 
 import { Range } from "react-date-range";
-import Calendar from "../inputs/Calendar";
-import Button from "../Button";
 
-interface ListingReservationsProps {
+import Button from "../Button";
+import Calendar from "../inputs/Calendar";
+
+interface ListingReservationProps {
   price: number;
   dateRange: Range;
   totalPrice: number;
@@ -14,7 +15,7 @@ interface ListingReservationsProps {
   disabledDates: Date[];
 }
 
-const ListingReservation: React.FC<ListingReservationsProps> = ({
+const ListingReservation: React.FC<ListingReservationProps> = ({
   price,
   dateRange,
   totalPrice,
@@ -26,16 +27,19 @@ const ListingReservation: React.FC<ListingReservationsProps> = ({
   return (
     <div
       className="
-        bg-white
-        rounded-xl
+      bg-white 
+        rounded-xl 
         border-[1px]
-        border-neutral-200
+      border-neutral-200 
         overflow-hidden
-        "
+      "
     >
-      <div className="flex flex-row items-center gap-1 p-4">
+      <div
+        className="
+      flex flex-row items-center gap-1 p-4"
+      >
         <div className="text-2xl font-semibold">$ {price}</div>
-        <div className="font-xl text-neutral-600">night</div>
+        <div className="font-light text-neutral-600">night</div>
       </div>
       <hr />
       <Calendar
@@ -47,16 +51,17 @@ const ListingReservation: React.FC<ListingReservationsProps> = ({
       <div className="p-4">
         <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
       </div>
+      <hr />
       <div
         className="
-        p-4
-        flex
-        flex-row
-        items-center
-        justify-between
-        font-semibold
-        text-lg
-      "
+          p-4 
+          flex 
+          flex-row 
+          items-center 
+          justify-between
+          font-semibold
+          text-lg
+        "
       >
         <div>Total</div>
         <div>$ {totalPrice}</div>

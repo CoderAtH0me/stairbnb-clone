@@ -1,20 +1,20 @@
 "use client";
 
+import { Range } from "react-date-range";
 import axios from "axios";
-
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
-import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
-import { Range } from "react-date-range";
-
-import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
+import {
+  differenceInCalendarDays,
+  differenceInDays,
+  eachDayOfInterval,
+} from "date-fns";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
-
-import { categories } from "@/app/components/navbar/Categorises";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import Container from "@/app/components/Container";
+import { categories } from "@/app/components/navbar/Categories";
 import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import ListingReservation from "@/app/components/listings/ListingReservation";
@@ -34,25 +34,23 @@ interface ListingClientProps {
 }
 
 const ListingClient: React.FC<ListingClientProps> = ({
-  listing,
   reservations = [],
+  listing,
   currentUser,
 }) => {
   const loginModal = useLoginModal();
+
   const router = useRouter();
 
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
-
-    reservations.forEach((reservation) => {
+    reservations.forEach((reservations) => {
       const range = eachDayOfInterval({
-        start: new Date(reservation.startDate),
-        end: new Date(reservation.endDate),
+        start: new Date(reservations.startDate),
+        end: new Date(reservations.endDate),
       });
-
       dates = [...dates, ...range];
     });
-
     return dates;
   }, [reservations]);
 
@@ -64,7 +62,6 @@ const ListingClient: React.FC<ListingClientProps> = ({
     if (!currentUser) {
       return loginModal.onOpen();
     }
-
     setIsLoading(true);
 
     axios
@@ -77,9 +74,8 @@ const ListingClient: React.FC<ListingClientProps> = ({
       .then(() => {
         toast.success("Listing reserved!");
         setDateRange(initialDateRange);
-
-        //Redirect to /trips
         router.push("/trips");
+        //router.refresh();
       })
       .catch(() => {
         toast.error("Something went wrong.");
@@ -107,10 +103,14 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const category = useMemo(() => {
     return categories.find((item) => item.label === listing.category);
   }, [listing.category]);
-
   return (
     <Container>
-      <div className="max-w-screen-lg mx-auto">
+      <div
+        className="
+          max-w-screen-lg 
+          mx-auto
+        "
+      >
         <div className="flex flex-col gap-6">
           <ListingHead
             title={listing.title}
@@ -121,12 +121,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
           />
           <div
             className="
-            grid
-            grid-cols-1
-            md:grid-cols-7
-            md:gap-10
-            mt-6
-          "
+              grid 
+              grid-cols-1 
+              md:grid-cols-7 
+              md:gap-10 
+              mt-6
+            "
           >
             <ListingInfo
               user={listing.user}
@@ -139,11 +139,11 @@ const ListingClient: React.FC<ListingClientProps> = ({
             />
             <div
               className="
-                order-first
-                mb-10
-                md:order-last
+                order-first 
+                mb-10 
+                md:order-last 
                 md:col-span-3
-                "
+              "
             >
               <ListingReservation
                 price={listing.price}

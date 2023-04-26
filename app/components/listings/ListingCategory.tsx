@@ -2,24 +2,20 @@
 
 import { IconType } from "react-icons";
 
-interface ListingCategoryProps {
+interface CategoryViewProps {
   icon: IconType;
   label: string;
   description: string;
 }
 
-const ListingCategory: React.FC<ListingCategoryProps> = ({
+const CategoryView: React.FC<CategoryViewProps> = ({
   icon: Icon,
   label,
   description,
 }) => {
   return (
     <div className="flex flex-col gap-6">
-      <div
-        className="
-            flex flex-row items-center gap-4
-        "
-      >
+      <div className="flex flex-row items-center gap-4">
         <Icon size={40} className="text-neutral-600" />
         <div className="flex flex-col">
           <div className="text-lg font-semibold">{label}</div>
@@ -30,4 +26,4 @@ const ListingCategory: React.FC<ListingCategoryProps> = ({
   );
 };
 
-export default ListingCategory;
+export default CategoryView;
