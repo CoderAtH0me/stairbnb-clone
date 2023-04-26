@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = ({
     }, 300);
   }, [disabled, onClose]);
 
-  const hanldeSubmit = useCallback(() => {
+  const handleSubmit = useCallback(() => {
     if (disabled) return;
 
     onSubmit();
@@ -79,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <div
           className="
-            realtive
+            relative
             w-full
             md:w-4/6
             lg:w-3/6
@@ -170,7 +170,7 @@ const Modal: React.FC<ModalProps> = ({
                   <Button
                     disabled={disabled}
                     label={actionLabel}
-                    onClick={hanldeSubmit}
+                    onClick={handleSubmit}
                   />
                 </div>
                 {footer}

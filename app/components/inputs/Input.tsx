@@ -54,7 +54,7 @@ const Input: React.FC<InputProps> = ({
             border-2
             rounded-md
             outline-none
-            trasition
+            transition
             disabled:opacity-70
             disabled:cursor-not-allowed
             ${formatPrice ? "pl-9" : "pl-4"}
